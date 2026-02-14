@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Valentine’s Day 😊</title>
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    overflow: hidden;
+
+    background: linear-gradient(-45deg, #ff7aa2, #ffd1dc, #ff4b6e, #ffc0cb);
+    background-size: 400% 400%;
+    animation: gradientBG 10s ease infinite;
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.card {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    max-width: 400px;
+    z-index: 10;
+}
+
+button {
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: none;
+    background: #ff4b6e;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 10px;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+    <h1>Happy Valentine’s Day, [Her Name] 🌹</h1>
+
+    <p>I know we just met… but I’m glad we did 😊</p>
+
+    <button onclick="yesClicked()">Yes 😊</button>
+    <button onmouseover="moveButton(this)">No 🙃</button>
+
+    <p id="hiddenMessage" style="display:none; margin-top:15px;">
+        Looks like we’re celebrating soon 😄
+    </p>
+</div>
+
+<script>
+
+// YES button
+function yesClicked() {
+    document.getElementById("hiddenMessage").style.display = "block";
+}
+
+// NO button runs away
+function moveButton(btn) {
+    btn.style.position = "absolute";
+    btn.style.left = Math.random() * 80 + "vw";
+    btn.style.top = Math.random() * 80 + "vh";
+}
+
+// Floating hearts
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.innerHTML = "❤️";
+    heart.style.position = "fixed";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.top = "100vh";
+    heart.style.fontSize = "20px";
+    heart.style.animation = "floatUp 4s linear";
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 4000);
+}
+
+setInterval(createHeart, 800);
+
+const style = document.createElement("style");
+style.innerHTML = `
+@keyframes floatUp {
+    to {
+        transform: translateY(-110vh);
+        opacity: 0;
+    }
+}`;
+document.head.appendChild(style);
+
+</script>
+
+</body>
+</html>
