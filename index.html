@@ -33,6 +33,7 @@ body {
     box-shadow: 0 10px 30px rgba(0,0,0,0.2);
     max-width: 400px;
     z-index: 10;
+    position: relative; /* Make card a reference for absolute buttons */
 }
 
 button {
@@ -62,37 +63,25 @@ button:hover {
     <button onmouseover="moveButton(this)">Yes 🙃</button>
 
     <p id="hiddenMessage" style="display:none; margin-top:15px;">
-        Looks like we’re not getting Ice Cream😄
+        Looks like we’re not getting Ice Cream 😄
     </p>
 </div>
 
 <script>
+// Show message when No button is clicked
 function noClicked() {
     document.getElementById("hiddenMessage").style.display = "block";
 }
 
-function moveButton(btn) {
-    const card = btn.parentElement; // move relative to card
-    btn.style.position = "absolute";
-    btn.style.zIndex = "20"; // make sure it’s on top
-    btn.style.left = Math.random() * (card.offsetWidth - btn.offsetWidth) + "px";
-    btn.style.top = Math.random() * (card.offsetHeight - btn.offsetHeight) + "px";
-}
-</script>
-
-// YES button
-function noClicked() {
-    document.getElementById("hiddenMessage").style.display = "block";
-}
-
-// NO button runs away
+// Move Yes button away when hovered
 function moveButton(btn) {
     btn.style.position = "absolute";
     btn.style.left = Math.random() * 80 + "vw";
     btn.style.top = Math.random() * 80 + "vh";
+    btn.style.zIndex = 20; // make sure it's above other elements
 }
 
-// Floating hearts
+// Floating ice cream hearts
 function createHeart() {
     const heart = document.createElement("div");
     heart.innerHTML = "🍧";
@@ -117,7 +106,6 @@ style.innerHTML = `
     }
 }`;
 document.head.appendChild(style);
-
 </script>
 
 </body>
