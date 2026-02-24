@@ -14,7 +14,6 @@ body {
     font-family: Arial, sans-serif;
     text-align: center;
     overflow: hidden;
-
     background: linear-gradient(-45deg, #ff7aa2, #ffd1dc, #ff4b6e, #ffc0cb);
     background-size: 400% 400%;
     animation: gradientBG 10s ease infinite;
@@ -33,7 +32,6 @@ body {
     box-shadow: 0 10px 30px rgba(0,0,0,0.2);
     max-width: 400px;
     z-index: 10;
-    position: relative; /* Make card a reference for absolute buttons */
 }
 
 button {
@@ -45,10 +43,15 @@ button {
     font-size: 16px;
     cursor: pointer;
     margin: 10px;
+    transition: transform 0.2s;
 }
 
 button:hover {
-    transform: scale(1.05);
+    transform: scale(1.1);
+}
+
+#yesBtn {
+    background-color: #4CAF50; /* Green for Yes */
 }
 </style>
 </head>
@@ -59,39 +62,40 @@ button:hover {
     <h1>Hi, Shayla 🌹</h1>
     <p>Just wanted to know, do you feel like having some ice cream 🍨🍧?</p>
     
-    <button onclick="noClicked()">No 😊</button>
-    <button onmouseover="moveButton(this)">Yes 🙃</button>
+    <button id="yesBtn" onclick="yesClicked()">Yes! 🙃</button>
+    
+    <button id="noBtn" onmouseover="moveButton(this)">No 😊</button>
 
-    <p id="hiddenMessage" style="display:none; margin-top:15px;">
-        Looks like we’re not getting Ice Cream 😄
+    <p id="hiddenMessage" style="display:none; margin-top:15px; font-weight: bold; color: #ff4b6e;">
+        Yay! Let's go get some ice cream! 🍨✨
     </p>
 </div>
 
 <script>
-// Show message when No button is clicked
-function noClicked() {
+// Logic for clicking Yes
+function yesClicked() {
     document.getElementById("hiddenMessage").style.display = "block";
+    document.getElementById("noBtn").style.display = "none"; // Hide the No button once they agree
 }
 
-// Move Yes button away when hovered
+// Move the "No" button away when hovered
 function moveButton(btn) {
-    btn.style.position = "absolute";
-    btn.style.left = Math.random() * 80 + "vw";
-    btn.style.top = Math.random() * 80 + "vh";
-    btn.style.zIndex = 20; // make sure it's above other elements
+    btn.style.position = "fixed"; // Changed to fixed so it moves relative to the whole screen
+    btn.style.left = Math.random() * (window.innerWidth - 100) + "px";
+    btn.style.top = Math.random() * (window.innerHeight - 50) + "px";
+    btn.style.zIndex = 100;
 }
 
-// Floating ice cream hearts
+// Floating ice cream animation
 function createHeart() {
     const heart = document.createElement("div");
     heart.innerHTML = "🍧";
     heart.style.position = "fixed";
     heart.style.left = Math.random() * 100 + "vw";
     heart.style.top = "100vh";
-    heart.style.fontSize = "20px";
+    heart.style.fontSize = "25px";
     heart.style.animation = "floatUp 4s linear";
     document.body.appendChild(heart);
-
     setTimeout(() => heart.remove(), 4000);
 }
 
